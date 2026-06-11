@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三郎サイトだよ</title>
+    <link rel="stylesheet" href="/saburou/styles.css" />
+  </head>
+  <body>
+    <main>
+      <div class="flonne-stage">
+        <img class="flonne-blue" src="/saburou/assets/flonne_blue.png" alt="" />
+        <img class="flonne-red" src="/saburou/assets/flonne_red.png" alt="" />
+      </div>
+
+      <div class="flonne-slider">
+        <span class="flonne-label flonne-label-top">天使</span>
+        <div class="flonne-range-wrap">
+          <input type="range" id="flonneRange" min="0" max="100" value="100" step="1" />
+        </div>
+        <span class="flonne-label flonne-label-bottom">悪魔</span>
+      </div>
+
+      <section class="flonne-content">
+        <div class="thanks-list">
+          {{range .Thanks}}
+          <article class="thanks-card">
+            <img class="thanks-avatar" src="/saburou/assets/{{.Image}}" alt="{{.Name}}" />
+            <div class="thanks-body">
+              <h2 class="thanks-name">{{.Name}}</h2>
+              <p class="thanks-message">{{.Message}}</p>
+              {{if .URL}}
+              <a class="thanks-url" href="{{.URL}}" target="_blank" rel="noopener noreferrer">{{.URL}}</a>
+              {{end}}
+              {{if .Endpoint}}
+              <a class="thanks-endpoint" href="{{.Endpoint}}">Visitar su página →</a>
+              {{end}}
+            </div>
+          </article>
+          {{end}}
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var flonneRange = document.getElementById("flonneRange");
+
+        function flonneOpacityHandler() {
+          var blue = document.querySelector(".flonne-blue");
+          var red = document.querySelector(".flonne-red");
+          var blue_opacity = flonneRange.value / 100;
+          var red_opacity = (100 - flonneRange.value) / 100;
+
+          blue.style.opacity = blue_opacity;
+          red.style.opacity = red_opacity;
+
+          document.documentElement.style.setProperty(
+            "--flonne-mix",
+            red_opacity * 100 + "%"
+          );
+        }
+
+        flonneRange.addEventListener("input", flonneOpacityHandler);
+        flonneOpacityHandler(); // Primera ejecución
+      })();
+    </script>
+  </body>
+</html>

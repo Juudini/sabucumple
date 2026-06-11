@@ -1,4 +1,7 @@
 /sabucumple_bin
+/.air-tmp/
 *.log
 /*.png
 /static/
+
+flonne_sabucumple.xcf
