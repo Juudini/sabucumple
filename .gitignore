@@ -1,4 +1,5 @@
 /sabucumple_bin
+/.air-tmp/
 *.log
 /*.png
 /static/
