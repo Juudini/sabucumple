@@ -1,60 +1,63 @@
 package main
 
 import (
-	"net/http"
-	"strings"
+  "fmt"
+  "net/http"
+  "strings"
 
-	"github.com/labstack/echo/v4"
+  "github.com/labstack/echo/v5"
 
-	"github.com/heizeisaburou/sabucumple/module"
-	"github.com/heizeisaburou/sabucumple/people/ejemplo"
+  "github.com/heizeisaburou/sabucumple/module"
+  "github.com/heizeisaburou/sabucumple/people/ejemplo"
 )
 
 func main() {
-	e := echo.New()
+  e := echo.New()
 
-	modules := []module.Module{
-		ejemplo.New(),
-	}
+  modules := []module.Module{
+    ejemplo.New(),
+  }
 
-	e.GET("/", func(c echo.Context) error {
-		var html strings.Builder
-		html.WriteString(`
-			<h1>Cumple 🎂</h1>
-			<ul>
-		`)
+  e.GET("/", func(c *echo.Context) error {
+    var html strings.Builder
+    html.WriteString(`
+      <h1>Cumple 🎂</h1>
+      <ul>
+    `)
 
-		for _, m := range modules {
-			html.WriteString(`<li><a href="/` + m.Endpoint() + `">` + m.Endpoint() + `</a></li>`)
-		}
+    for _, m := range modules {
+      html.WriteString(`<li><a href="/` + m.Endpoint() + `">` + m.Endpoint() + `</a></li>`)
+    }
 
-		html.WriteString(`</ul>`)
+    html.WriteString(`</ul>`)
 
-		return c.HTML(http.StatusOK, html.String())
-	})
+    return c.HTML(http.StatusOK, html.String())
+  })
 
-	for _, m := range modules {
-		g := e.Group("/" + m.Endpoint())
+  for _, m := range modules {
+    g := e.Group("/" + m.Endpoint())
 
-		// Placeholder para que /chavsi no pete aunque Register esté vacío.
-		g.GET("", placeholder(m.Endpoint()))
-		g.GET("/", placeholder(m.Endpoint()))
+    // Placeholder para que /chavsi no pete aunque Register esté vacío.
+    g.GET("", placeholder(m.Endpoint()))
+    g.GET("/", placeholder(m.Endpoint()))
 
-		// Rutas propias de cada persona.
-		m.Register(g)
-	}
+    // Rutas propias de cada persona.
+    m.Register(g)
+  }
 
-	e.Static("/static", "static")
+  e.Static("/static", "static")
 
-	e.Logger.Fatal(e.Start(":8080"))
+  fmt.Println("Servidor escuchando en http://localhost:8080")
+  e.Start(":8080")
+
 }
 
 func placeholder(name string) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		return c.HTML(http.StatusOK, `
-			<h1>Zona de `+name+` 🚧</h1>
-			<p>Todavía no hay nada aquí.</p>
-			<a href="/">Volver</a>
-		`)
-	}
+  return func(c *echo.Context) error {
+    return c.HTML(http.StatusOK, `
+      <h1>Zona de `+name+` 🚧</h1>
+      <p>Todavía no hay nada aquí.</p>
+      <a href="/">Volver</a>
+    `)
+  }
 }
