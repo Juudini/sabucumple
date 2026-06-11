@@ -13,6 +13,7 @@ import (
 	"github.com/heizeisaburou/sabucumple/people/juudini"
 	"github.com/heizeisaburou/sabucumple/people/leinSeab"
 	"github.com/heizeisaburou/sabucumple/people/midos"
+	"github.com/heizeisaburou/sabucumple/people/nazads"
 	"github.com/heizeisaburou/sabucumple/people/saburou"
 	"github.com/heizeisaburou/sabucumple/people/savage"
 	"github.com/heizeisaburou/sabucumple/people/ladythekilla"
@@ -26,6 +27,7 @@ func main() {
 		ejemplo.New(),
 		juudini.New(),
 		midos.New(),
+		nazads.New(),
 		savage.New(),
 		chavsi.New(),
 		saburou.New(),

@@ -81,6 +81,14 @@ var thanks = []Person{
 		Active:   true,
 	},
 	{
+		Name:     "NazaDS",
+		Image:    "nazads.png",
+		Message:  "Gracias por esa pedazo de página dedicada a uno de mis personajes favoritos y por ese espiritu peleon que de alguna manera siempre consigue sacarnos unas risas.",
+		URL:      "https://github.com/NazarenoDS",
+		Endpoint: "/nazads/",
+		Active:   true,
+	},
+	{
 		Name:     "Saburou",
 		Image:    "saburou.png",
 		Message:  "¡Para que tengamos muchos más eventos como este!",
