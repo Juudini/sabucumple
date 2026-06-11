@@ -81,19 +81,19 @@ var thanks = []Person{
 		Active:   true,
 	},
 	{
-		Name:     "Savage",
-		Image:    "savage.png",
-		Message:  "Gracias por la tarta y por evitar que pierda el timepo convenciendome de no hacer implementaciones imposibles en go.",
-		URL:      "https://github.com/lsproule",
-		Endpoint: "/savage/",
-		Active:   true,
-	},
-	{
 		Name:     "Saburou",
 		Image:    "saburou.png",
 		Message:  "¡Para que tengamos muchos más eventos como este!",
 		URL:      "https://github.com/heizeisaburou",
 		Endpoint: "/saburou/",
+		Active:   true,
+	},
+	{
+		Name:     "Savage",
+		Image:    "savage.png",
+		Message:  "Gracias por la tarta y por evitar que pierda el timepo convenciendome de no hacer implementaciones imposibles en go.",
+		URL:      "https://github.com/lsproule",
+		Endpoint: "/savage/",
 		Active:   true,
 	},
 }
