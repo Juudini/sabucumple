@@ -364,27 +364,35 @@
   </div>
 
   <!-- Music: YOASOBI - Idol (Oshi no Ko OP) -->
-  <iframe id="yt-player" width="0" height="0" style="position:fixed;bottom:0;right:0;border:none;display:none;" allow="autoplay; encrypted-media" title="music"></iframe>
+  <div id="yt-player"></div>
   <div id="music-label" style="position:fixed;bottom:12px;right:12px;z-index:20;color:rgba(255,255,255,0.2);font-size:11px;font-family:'Segoe UI',sans-serif;pointer-events:none;opacity:0;transition:opacity 1s;">♪ YOASOBI - Idol</div>
 
   <script>
-    // Play music on first click — simplest approach
-    document.addEventListener('click', function startMusic() {
-      var el = document.getElementById('yt-player');
-      el.style.display = 'block';
-      el.src = 'https://www.youtube.com/embed/ZRtdQ81jPUQ?autoplay=1&loop=1&playlist=ZRtdQ81jPUQ&controls=0&modestbranding=1&rel=0';
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        height: '0', width: '0',
+        videoId: 'ZRtdQ81jPUQ',
+        playerVars: { autoplay: 0, loop: 1, playlist: 'ZRtdQ81jPUQ', controls: 0, modestbranding: 1, rel: 0 },
+        events: {
+          onReady: function(e) { e.target.setVolume(50); }
+        }
+      });
+    }
+
+    function startMusic() {
+      if (player && player.playVideo) { player.playVideo(); }
       document.getElementById('music-label').style.opacity = '1';
       document.removeEventListener('click', startMusic);
       document.removeEventListener('touchstart', startMusic);
-    });
-    document.addEventListener('touchstart', function startMusic() {
-      var el = document.getElementById('yt-player');
-      el.style.display = 'block';
-      el.src = 'https://www.youtube.com/embed/ZRtdQ81jPUQ?autoplay=1&loop=1&playlist=ZRtdQ81jPUQ&controls=0&modestbranding=1&rel=0';
-      document.getElementById('music-label').style.opacity = '1';
-      document.removeEventListener('click', startMusic);
-      document.removeEventListener('touchstart', startMusic);
-    });
+    }
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
 
     (function() {
       const canvas = document.getElementById('confetti-canvas');

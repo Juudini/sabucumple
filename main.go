@@ -8,10 +8,11 @@ import (
   "github.com/labstack/echo/v5"
 
   "github.com/heizeisaburou/sabucumple/module"
-  "github.com/heizeisaburou/sabucumple/people/ejemplo"
-  "github.com/heizeisaburou/sabucumple/people/midos"
-  "github.com/heizeisaburou/sabucumple/people/sabu"
-  "github.com/heizeisaburou/sabucumple/people/savage"
+	"github.com/heizeisaburou/sabucumple/people/ejemplo"
+	"github.com/heizeisaburou/sabucumple/people/midos"
+	"github.com/heizeisaburou/sabucumple/people/sabu"
+	"github.com/heizeisaburou/sabucumple/people/savage"
+	"github.com/heizeisaburou/sabucumple/people/kagliostro"
 )
 
 func main() {
@@ -22,6 +23,7 @@ func main() {
     midos.New(),
     sabu.New(),
     savage.New(),
+    kagliostro.New(),
   }
 
 
